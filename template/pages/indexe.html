@@ -1,0 +1,56 @@
+<div class="container text-center" style="padding: auto; margin-top:5%; margin-bottom: 5%; box-shadow: 1ch;">
+
+    {% if plan|length_is:"0" %}
+    <div class="text-center">
+        <h1>Desole pas de resultats trouver</h1>
+    </div>
+    <br/> {% else %}
+    <div>
+        <h1 class="wthree_text_info">
+            <u>{{list_itre}}</u>
+        </h1> <br/> {% if list_titre %}
+        <h1 class="wthree_text_info"> {{list_titre}}</h1><br/><br/> {% endif %}
+    </div>
+    <div class="container">
+        <div class="row "></div>
+        {% for plans in plan %}
+        <div class="col-md-4 " id="carte ">
+            <div style="border: rgb(150, 169, 154) solid; height: 500px;">
+                <div style="height: 20rem ">
+                    <a href=" {% url 'detail' id_plan=plans.id %} ">
+                                {% for image in plans.image.all%}
+                                    {% if image.image %}
+                                            <img src="{{image.image.url}} " alt=" " style="width: 100%;height:100%; ">
+                                    {% endif %}
+                                {% endfor %}
+                            </a>
+                </div>
+                <div>
+                    <hr>
+                    <h3>{{plans.titre}}</h3>
+                    <h3><b>prix :</b><span>{{plans.prix}}</span></h3>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if paginator%}
+    <br/>
+    <div class="clearfix ">
+        <nav class="arial-label ">
+            <ul class="page ">
+                <li class="btn btn-info ">
+                    {% if plan.has_previous%}
+                    <a href=" ?page={{plan.previous_page_number}} ">precedantes</a> {% endif %}
+                </li>
+                <li class="btn btn-info ">
+
+                    {% if plan.has_next %}
+                    <a href=" ?page={{plan.next_page_number}} ">next</a> {% endif %}
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <br> {% endif %} {% endif %}
+</div>
