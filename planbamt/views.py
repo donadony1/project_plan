@@ -1,10 +1,15 @@
 from multiprocessing import context
 from re import template
-from django.shortcuts import render
-from . models import Image,Categorie,Plan
+from django.shortcuts import render,get_object_or_404
+import pkg_resources
+from . models import Image,Categorie,Plan,Visitor_Infos
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 # Create your views here.
+
+
+
+#------ new --------------------------#
 
 def index(request):
     plans= Plan.objects.all()[:6]
@@ -35,7 +40,7 @@ def list(request):
     return render(request,'pages/list.html',context)
 
 def detail(request, id_plan):
-    plan=Plan.objects.get(pk=id_plan)
+    plan=get_object_or_404(Plan, pk=id_plan)
     context={
         'description':plan.description,
         'titre':plan.titre,
@@ -65,3 +70,4 @@ def recherche(request):
         'list_titre':titre
     }
     return render(request,'pages/recherche.html',context)
+

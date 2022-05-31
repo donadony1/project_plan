@@ -1,1 +1,28 @@
-#carte {}
+.carte {
+    background-color: rgb(255, 255, 255);
+}
+
+.carte:hover {
+    background-color: rgba(3, 163, 6, 0.097);
+}
+
+.box:hover {
+    background-color: rgba(78, 147, 96, 0);
+    outline: 0;
+}
+
+.box {
+    border: rgb(221, 228, 223) solid;
+    height: 100%;
+    margin: 1.5%;
+    padding: 2%;
+}
+
+.grid {
+    border: solid rgba(117, 109, 109, 0.25);
+    box-shadow: aqua;
+}
+
+.btn {
+    margin-bottom: 1px;
+}

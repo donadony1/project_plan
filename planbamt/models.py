@@ -1,4 +1,6 @@
+from datetime import datetime
 from email.mime import image
+from ipaddress import ip_address
 from tkinter.tix import Tree
 from venv import create
 from django.db import models
@@ -44,4 +46,10 @@ class Plan(models.Model):
 
     def __str__(self):
         return self.titre
+
+class Visitor_Infos(models.Model):
+    ip_address=models.GenericIPAddressField()
+    page_visited=models.TextField()
+    event_date=models.DateTimeField(default=datetime.now)
+
 

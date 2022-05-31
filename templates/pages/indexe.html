@@ -1,0 +1,136 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="3" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="4" class=""></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>Batiments<span>publics</span></h3>
+                    <p>Batiment reserver aux publics</p>
+                    <!-- <a class="hvr-outline-out button2" href="mens.html">Shop Now </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="item item2">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>plan de maison<span> Particulier</span></h3>
+                    <p>plan de batiment reserver pour une faille</p>
+                    <!-- <a class="hvr-outline-out button2" href="mens.html">Shop Now </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="item item3">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>plan <span>d'immeuble</span></h3>
+                    <p>plan des gros d'immeubles R4 et plus </p>
+                    <!-- <a class="hvr-outline-out button2" href="mens.html">Shop Now </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="item item4">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>Notre <span>Collection</span></h3>
+                    <p>une grande collecton de plan pour tout type de construction</p>
+                    <!-- <a class="hvr-outline-out button2" href="mens.html">Shop Now </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="item item5">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h3>besoin une <span>équipe pour vos travaux</span></h3>
+                    <p>Nous avons une Equipe de techiques qualifier pour execution des travaux de constructions</p>
+                    <!-- <a class="hvr-outline-out button2" href="mens.html">Shop Now </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+    <!-- The Modal -->
+</div>
+<!-- //banner -->
+
+<div class="container text-center" style="padding: auto; margin-top:5%; margin-bottom: 5%; box-shadow: 1ch;">
+
+    {% if plan|length_is:"0" %}
+    <div class="text-center">
+        <h1>Desole pas de resultats trouver</h1>
+    </div>
+    <br/> {% else %}
+    <div>
+        <h1 class="wthree_text_info">
+            <u>{{list_itre}}</u>
+        </h1> <br/> {% if list_titre %}
+        <h1 class="wthree_text_info"> {{list_titre}}</h1><br/><br/> {% endif %}
+    </div>
+    <div class="container">
+        <div class="row ">
+            {% for plans in plan %}
+            <div class="carte col-md-4 ">
+                <div class="box">
+                    <div>
+
+                        <div style="height: 20rem ">
+                            <a href=" {% url 'detail' id_plan=plans.id %} ">
+                                    {% for image in plans.image.all%}
+                                        {% if image.image %}
+                                                <img src="{{image.image.url}} " alt=" " style="width: 100%;height:100%; ">
+                                        {% endif %}
+                                    {% endfor %}
+                            </a>
+                        </div>
+                        <div style="border: rgba(14, 121, 6, 0.339) solid; align-items: center;justify-content: center; display:flex;">
+                            <hr>
+                            <h3>{{plans.titre}}</h3>
+                        </div>
+
+                    </div>
+                    <div class="btn btn-success " style="padding: 2%;">
+                        <h3><b>prix :</b><span>{{plans.prix}} </span> <span>Frs</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if paginator%}
+    <br/>
+    <div class=" clearfix ">
+        <nav class="arial-label ">
+            <ul class="page ">
+                <li class="btn btn-info ">
+                    {% if plan.has_previous%}
+                    <a href=" ?page={{plan.previous_page_number}} ">
+                        <h3 style="color:beige ">precedantes</h3>
+                    </a> {% endif %}
+                </li>
+                <li class="btn btn-info ">
+
+                    {% if plan.has_next %}
+                    <a href=" ?page={{plan.next_page_number}} ">
+                        <h3 style="color:beige ">Next</h3>
+                    </a> {% endif %}
+
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <br> {% endif %} {% endif %}
+</div>
