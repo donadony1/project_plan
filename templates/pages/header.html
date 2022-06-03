@@ -105,8 +105,17 @@
                     <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Connexion </a></li>
                     <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Inscription </a></li>
                     <li><i class="fa fa-phone" aria-hidden="true"></i> Telephone: 690386539</li>
-                    <li>
-                        <h1>{{nb_visiteur}}</h1>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i> {% if user.is_authenticated %}
+                        <h5>Bienvenue <span class="btn-primary">{{user.username}}</span></h5>
+                        {% else %}
+                        <h5><span class="btn-primary"> Vous n'etes pas connecté</span></h5>
+                        {% endif %}
+                    </li>
+                    <li> 
+                        <h2>{% if nb_visiteur %}
+                               le nombre de visiteur est : <span> {{nb_visiteur}} </span>
+                            {% endif %}
+                        </h2>
                     </li>
                     <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="dieudonne.bayiha@buildingclustercompagny.com">dieudonne.bayiha@buildingclustercompagny.com</a></li>
                 </ul>
@@ -186,7 +195,10 @@
                                         <a class="menu__link" href="{% url 'propos' %}">A proros de nous</a>
                                     </li>
                                     <!-- <li class=" menu__item"><a class="menu__link" href="about.html">About</a></li> -->
-                                    <li class=" menu__item"><a class="menu__link" href="{% url 'contact' %}">Contact</a></li>
+                                    <li class=" menu__item"><a class="menu__link" href="{% url 'contact' %}">Contact</a></li> 
+                                    {% if user.username %}
+                                        <li class=" menu__item" style="float:left"><a  href="{% url 'deconnexion' %}"> <span class='btn btn-danger'> deconnexion </span> </a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
